@@ -8,4 +8,9 @@ pub async fn search(name: String) -> Result<ArtistInfo, ExitFailure> {
         .json::<ArtistInfo>()
         .await?;
     Ok(result)
+
+    // match make_request() {
+    //     Err(e) => handler(e),
+    //     Ok(_)  => return,
+   // }
 }

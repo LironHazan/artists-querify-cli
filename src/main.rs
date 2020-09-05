@@ -1,9 +1,11 @@
 mod api;
 mod artists;
+mod view;
 
+#[macro_use] extern crate prettytable;
+use crate::artists::ArtistInfo;
 use structopt::StructOpt;
 use exitfailure::{ExitFailure};
-use crate::artists::ArtistInfo;
 
 #[derive(StructOpt)]
 struct Cli {
@@ -14,6 +16,6 @@ struct Cli {
 async fn main() -> Result<(), ExitFailure> {
     let args = Cli::from_args();
     let result = ArtistInfo::get(args.name).await?;
-    println!("INFO: {:?}", result);
+    view::output_artist_table(result);
     Ok(())
 }
