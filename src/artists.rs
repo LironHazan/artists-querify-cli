@@ -1,8 +1,6 @@
 use exitfailure::{ExitFailure};
 use serde_derive::{Deserialize, Serialize};
 use crate::api;
-use std::fmt;
-use serde::export::Formatter;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Artist { // using camelCase instead of snake_case due to the API
@@ -20,7 +18,6 @@ pub struct ArtistInfo {
 
 impl ArtistInfo {
     pub async fn get(name: String) -> Result<Self, ExitFailure> {
-        let result = api::search(name).await?;
-        Ok(result)
+        Ok(api::search(name).await?)
     }
 }

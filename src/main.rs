@@ -3,7 +3,7 @@ mod artists;
 mod view;
 
 #[macro_use] extern crate prettytable;
-use crate::artists::ArtistInfo;
+use crate::artists::{ArtistInfo, Artist};
 use structopt::StructOpt;
 use exitfailure::{ExitFailure};
 
@@ -15,7 +15,7 @@ struct Cli {
 #[tokio::main]
 async fn main() -> Result<(), ExitFailure> {
     let args = Cli::from_args();
-    let result = ArtistInfo::get(args.name).await?;
-    view::output_artist_table(result);
-    Ok(())
+    let info = ArtistInfo::get(args.name).await?;
+    let artist = info.artists.first();
+    Ok(view::output_artist_table(artist.unwrap()))
 }

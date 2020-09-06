@@ -1,9 +1,8 @@
-use crate::artists::ArtistInfo;
+use crate::artists::{Artist};
 use prettytable::{Table, Row, Cell, color, Attr, format};
 use prettytable::color::Color;
 
-pub fn output_artist_table(info: ArtistInfo) {
-    let artist = &info.artists[0];
+pub fn output_artist_table(artist: &Artist) {
     let name = format!("{}", artist.strArtist);
     let formed_at  = format!("{}", artist.intFormedYear);
     let genre  = format!("{}", artist.strGenre);
